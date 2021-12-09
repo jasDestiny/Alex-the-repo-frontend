@@ -1,6 +1,7 @@
 import "./App.css";
 
 import Home from "./pages/home-page/home-page.component";
+import AddProject from "./pages/add-project/sign-in-sign-up-page.component";
 import SignInAndSignUp from "./pages/sign-in-sign-up-page/sign-in-sign-up-page.component";
 
 import { Route, Switch, Redirect } from "react-router";
@@ -41,6 +42,17 @@ class App extends React.Component {
         </div>
         <Switch>
           <Route exact path="/" render={()=> <Home searchInput={this.state.searchInput}/>} />
+
+          <Route exact path="/addproject"
+          path="/addproject"
+          render={() =>
+              this.state.userSigned ? (
+                <Redirect to="/" />
+              ) : (
+                <AddProject handleSignIn={this.handleSignIn} />
+              )
+            }
+          />
           <Route
             exact
             path="/signin"
