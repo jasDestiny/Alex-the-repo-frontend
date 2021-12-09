@@ -36,6 +36,11 @@ class SignIn extends Component {
         })
       );
       console.log("signed in")
+      const reqData= await request("/allprojects",{
+
+      });
+
+      localStorage.setItem("projectKMS", JSON.stringify(reqData));
       this.props.handleSignIn(true)
 
     }else{

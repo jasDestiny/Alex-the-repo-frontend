@@ -42,6 +42,12 @@ class SignUp extends Component {
         })
       );
       this.props.handleSignIn(true);
+
+      const reqData= await request("/allprojects",{
+
+      });
+
+      localStorage.setItem("projectKMS", JSON.stringify(reqData));
     } else {
       alert("This email id is already taken");
     }

@@ -4,13 +4,9 @@ import "./service-card.styles.scss";
 const request = require("../../utility/utility-functions");
 
 function ServiceCard({ providerName, providerCity, description, location }) {
-  const getCrowdStats = async () => {
-    
-  };
-
-
   const joinVQ = async () => {
 
+    
     const userAuthData = JSON.parse(localStorage.getItem("userAuthData"));
 
     const result = await request("/users/vq/entervq", {
@@ -22,7 +18,7 @@ function ServiceCard({ providerName, providerCity, description, location }) {
     console.log(result);
     alert(`Your queue position is ${result.position}`);
   };
-
+  let hreflink=`location.href='${location}'`;
   return (
     //View VQ stats modal
     <div>
@@ -31,7 +27,7 @@ function ServiceCard({ providerName, providerCity, description, location }) {
         <h5 class="card-title">{providerName}</h5>
         <h6 class="card-subtitle mb-2 text-muted">
           <a
-            href={`https://www.google.com/maps/search/${location}/@+${location}17z`}
+            href={location}
             target="_blank"
           >
             📍
@@ -39,16 +35,8 @@ function ServiceCard({ providerName, providerCity, description, location }) {
           </a>
         </h6>
         <p class="card-text">{description}</p>
-        <button
-          className="btn btn-primary card-link"
-          data-toggle="modal"
-          data-target="#exampleModal"
-          onClick={getCrowdStats}
-        >
-          Crowd stats
-        </button>
-        <button className="btn btn-success card-link" onClick={joinVQ}>
-          Join VQ
+        <button className="btn btn-success card-link" onclick={hreflink}>
+          View Project
         </button>
       </div>
 

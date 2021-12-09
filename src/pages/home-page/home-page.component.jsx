@@ -17,7 +17,6 @@ class Home extends React.Component {
 
   async componentDidMount() {
     const path = "/allprojects";
-
     const data = JSON.parse(localStorage.getItem("userAuthData"))
 
     try {

@@ -5,13 +5,26 @@ import './card-list.styles.scss'
 
 function CardList({ services,searchInput }) {
   console.log(services);
-  const filteredServices = searchInput===""?services: services.filter((service)=>(
-    service.city.toLowerCase().includes(searchInput.toLowerCase()) 
-  ));
+  const filteredServices = JSON.parse(localStorage.getItem('projectKMS'));
+  console.log(filteredServices);
+  
+  
 
   return (
     <div>
-      
+      <div className="card-list">
+        {filteredServices.map((service) => (
+          <div className="">
+            <ServiceCard
+              key = {service._id}
+              providerName={service.projectname}
+              providerCity={service.university}
+              description={service.description}
+              location ={service.githubrepo}
+            />
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
