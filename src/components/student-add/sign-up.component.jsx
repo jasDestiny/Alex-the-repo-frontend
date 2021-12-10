@@ -18,6 +18,12 @@ class StudentAdd extends Component {
       projectdescription:""
     };
   }
+  
+  alert_projects = (projects)=>{
+    for(let i=0;i<projects.length;i++){
+      alert(`${projects[i].projectname} uses the same project name, use different one to prevent plagiarism`);
+    }
+}
 
   handleSubmit = async (event) => {
     //console.log("handle submit works");
@@ -25,6 +31,19 @@ class StudentAdd extends Component {
     const { projectname, createdby, projectype, githubrepo, enddate, projectdescription } = this.state;
     //console.log(email,password,city,usertype)
 
+    const req= await request("/allprojects/fuzzysearch",{
+      projectname:projectname, 
+      createdby:createdby, 
+      projectype:projectype, 
+      githubrepo:githubrepo, 
+      enddate:enddate, 
+      projectdescription:projectdescription,
+    });
+
+    if(req.length!==0){
+      this.alert_projects(req);
+      return;
+    }
     const result = await request("/personal", {
       projectname:projectname, 
       createdby:createdby, 

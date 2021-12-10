@@ -18,7 +18,7 @@ function ServiceCard({ providerName, providerCity, description, location }) {
     console.log(result);
     alert(`Your queue position is ${result.position}`);
   };
-  let hreflink=`location.href='${location}'`;
+  let hreflink=`window.location='${location}'`;
   return (
     //View VQ stats modal
     <div>

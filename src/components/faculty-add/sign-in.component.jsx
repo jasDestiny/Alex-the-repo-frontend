@@ -21,12 +21,34 @@ class SignIn extends Component {
     };
   }
 
+  alert_projects = (projects)=>{
+      for(let i=0;i<projects.length;i++){
+        alert(`${projects[i].projectname} uses the same project name, use different one to prevent plagiarism`);
+      }
+  }
+
   handleSubmit = async (event) => {
     //console.log("handle submit works");
     event.preventDefault();
     const { projectname, createdby, projectype, githubrepo, enddate, projectdescription, university, facultyid } = this.state;
     //console.log(email,password,city,usertype)
 
+    const req= await request("/allprojects/fuzzysearch",{
+      projectname:projectname, 
+      createdby:createdby, 
+      projectype:projectype, 
+      githubrepo:githubrepo, 
+      enddate:enddate, 
+      projectdescription:projectdescription,
+      university:university,
+      facultyid:facultyid
+    });
+
+    if(req.length!==0){
+      this.alert_projects(req);
+      return;
+    }
+    
     const result = await request("/faculty", {
       projectname:projectname, 
       createdby:createdby, 
